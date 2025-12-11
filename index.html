@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Blueprints - Factorio</title>
+    <style>
+        :root {
+            --bg-color: #1e1e1e;
+            --card-bg: #2a2a2a;
+            --accent: #ff9f1c; /* Factorio Orange */
+            --accent-hover: #e08c2d;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border: #444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
+        p.subtitle { color: var(--text-muted); margin-top: 10px; }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .blueprint-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .blueprint-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .card-title { font-size: 1.25rem; font-weight: bold; color: var(--accent); }
+        .card-tags span {
+            font-size: 0.8rem;
+            background: #444;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        .card-desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 15px; }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #3a3a3a;
+            color: white;
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+            flex: 1;
+        }
+
+        button.primary {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: #121212;
+        }
+
+        button.primary:hover { background-color: var(--accent-hover); }
+        button.secondary:hover { background-color: #505050; }
+
+        /* Área do texto da string (escondida por padrão) */
+        .string-box {
+            display: none;
+            margin-top: 15px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 100px;
+            background: #111;
+            color: #0f0;
+            border: 1px solid var(--border);
+            font-family: monospace;
+            font-size: 0.8rem;
+            padding: 10px;
+            resize: vertical;
+            box-sizing: border-box; /* Garante que padding não estoure largura */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Factorio Blueprints</h1>
+        <p class="subtitle">Coleção pessoal de layouts otimizados para Space Age & Vanilla</p>
+    </header>
+
+    <div class="container" id="app">
+        </div>
+
+    <script>
+        // ==========================================
+        // ÁREA DE DADOS - ADICIONE SUAS BLUEPRINTS AQUI
+        // ==========================================
+        
+        const blueprints = [
+            {
+                id: 1,
+                title: "Logística Inteligente Fulgora (RS Latch)",
+                tags: ["Space Age", "Circuitos", "Fulgora"],
+                description: "Sistema usando Combinador de Decisão com memória para evitar oscilação de robôs. Ativa em 10k itens, desliga em 1k.",
+                // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
+                string: "0eNvr..." 
+            },
+            {
+                id: 2,
+                title: "Energia de Fusão - Start Automático",
+                tags: ["Space Age", "Energia", "Late Game"],
+                description: "Setup completo de fusão com injeção de fluoroketone e controle de temperatura.",
+                // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
+                string: "0eNvr..." 
+            },
+            {
+                id: 3,
+                title: "Mall Espacial Compacto",
+                tags: ["Plataforma", "Logística"],
+                description: "Layout de plataforma focado em fabricar munição e processar asteroides com pouco espaço.",
+                // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
+                string: "0eNvr..." 
+            }
+        ];
+
+        // ==========================================
+        // LÓGICA DO SITE (NÃO PRECISA MEXER)
+        // ==========================================
+
+        const app = document.getElementById('app');
+
+        function renderBlueprints() {
+            app.innerHTML = blueprints.map(bp => `
+                <div class="blueprint-card">
+                    <div class="card-header">
+                        <div class="card-title">${bp.title}</div>
+                        <div class="card-tags">
+                            ${bp.tags.map(tag => `<span>${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="card-desc">${bp.description}</div>
+                    
+                    <div class="actions">
+                        <button class="primary" onclick="copyString('${bp.string}', this)">
+                            Copiar String
+                        </button>
+                        <button class="secondary" onclick="toggleString(${bp.id})">
+                            Ver Código
+                        </button>
+                    </div>
+
+                    <div class="string-box" id="box-${bp.id}">
+                        <textarea readonly onclick="this.select()">${bp.string}</textarea>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleString(id) {
+            const box = document.getElementById(`box-${id}`);
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+            } else {
+                box.style.display = 'block';
+            }
+        }
+
+        async function copyString(text, btnElement) {
+            try {
+                await navigator.clipboard.writeText(text);
+                const originalText = btnElement.innerText;
+                
+                // Feedback visual
+                btnElement.innerText = "Copiado! ✅";
+                btnElement.style.backgroundColor = "#4caf50";
+                
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                    btnElement.style.backgroundColor = ""; // Volta ao CSS original
+                }, 2000);
+            } catch (err) {
+                console.error('Falha ao copiar:', err);
+                alert('Erro ao copiar automaticamente. Tente abrir o código e copiar manualmente.');
+            }
+        }
+
+        // Inicia a renderização
+        renderBlueprints();
+    </script>
+</body>
+</html>
