@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,8 @@
         :root {
             --bg-color: #1e1e1e;
             --card-bg: #2a2a2a;
-            --accent: #ff9f1c; /* Factorio Orange */
+            --accent: #ff9f1c;
+            /* Factorio Orange */
             --accent-hover: #e08c2d;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
@@ -32,17 +34,26 @@
             border-bottom: 2px solid var(--accent);
             padding-bottom: 20px;
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
         }
 
-        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
-        p.subtitle { color: var(--text-muted); margin-top: 10px; }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
             display: grid;
-            gap: 30px; /* Aumentei um pouco o espaço entre cards */
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
         }
 
         .blueprint-card {
@@ -50,7 +61,7 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             transition: transform 0.2s, border-color 0.2s;
         }
 
@@ -66,8 +77,16 @@
             margin-bottom: 15px;
         }
 
-        .card-title { font-size: 1.4rem; font-weight: bold; color: var(--accent); }
-        .card-tags { text-align: right; }
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .card-tags {
+            text-align: right;
+        }
+
         .card-tags span {
             display: inline-block;
             font-size: 0.75rem;
@@ -80,20 +99,30 @@
             border: 1px solid #555;
         }
 
-        .card-desc { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem;}
+        .card-desc {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
 
         /* --- NOVO CSS PARA IMAGEM --- */
         .blueprint-image {
             width: 100%;
-            height: auto; /* Mantém a proporção original da imagem */
-            max-height: 500px; /* Limite de altura para não dominar a tela em desktops */
-            object-fit: contain; /* Garante que a imagem inteira apareça */
+            height: auto;
+            /* Mantém a proporção original da imagem */
+            max-height: 500px;
+            /* Limite de altura para não dominar a tela em desktops */
+            object-fit: contain;
+            /* Garante que a imagem inteira apareça */
             border-radius: 6px;
             border: 1px solid var(--border);
             margin-bottom: 20px;
-            background-color: #151515; /* Fundo escuro para imagens transparentes ou enquanto carrega */
+            background-color: #151515;
+            /* Fundo escuro para imagens transparentes ou enquanto carrega */
             display: block;
         }
+
         /* --------------------------- */
 
         .actions {
@@ -120,8 +149,14 @@
             color: #121212;
         }
 
-        button.primary:hover { background-color: var(--accent-hover); box-shadow: 0 0 10px rgba(255, 159, 28, 0.3); }
-        button.secondary:hover { background-color: #505050; }
+        button.primary:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 0 10px rgba(255, 159, 28, 0.3);
+        }
+
+        button.secondary:hover {
+            background-color: #505050;
+        }
 
         /* Área do texto da string (escondida por padrão) */
         .string-box {
@@ -129,12 +164,19 @@
             margin-top: 15px;
             animation: fadeIn 0.3s ease-in-out;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         textarea {
             width: 100%;
             height: 120px;
@@ -150,6 +192,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -158,13 +201,13 @@
     </header>
 
     <div class="container" id="app">
-        </div>
+    </div>
 
     <script>
         // ==========================================
         // ÁREA DE DADOS - ADICIONE SUAS BLUEPRINTS AQUI
         // ==========================================
-        
+
         const blueprints = [
             {
                 id: 1,
@@ -173,7 +216,7 @@
                 description: "Sistema para fazer requisições logísticas em cada um dos planetas. Item e tamanho do buffer são parâmetros.",
                 imageUrl: "1.png",
                 // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
-                string: "0eNqlVFGOmzAUvEr0PitnFSAkG9QeoH9V+xlFyMDLxpKxWdtsiiIO0Fv0bD1JnyGbZAmbbdQfZBvPjGfesw+QyRorI5SD5AAi18pCsj6AFU+KS7+meImQADfC7Up0Ip/musyE4k4baBkIVeBPSIKWjaAKzEWBZhwSthsGqJxwAnvVbtKkqi4zNMTJXnlsyaWcSl5WwKDSliBaeR2vHC0fYgYNJNMgih5iEiAbzmiZZrjjL4JEaWcuTF4Ll6LimcQCEmdqZKdlghQn1q0w1qVXbipuaODIzwx6Feu4T27mJ6X/7R0m8OfXb2i7HbIX7808dd+s+3Ifmc9s4Dk8eS6ErSRvphVXKMdsPw5tF8Jg3m8JwvEUThb6wP/LdTi0/bkrbt6zjaHbzQcbKBe5541N7U7v+xKNZBSx2115ndV8dndSZ+pzb9h/j8miR6XntGI6gq6Qsupk4RMdU9euqj/iasfaZM5uXLER/+Hd/o+8A/OXs/X9LRPMZv7S977feWmuwFVDh6iVS7dGl6lQBIVky6VF6qfW8+3JjmdbByxgEYs2bB3RaE4j+jvoeddUXkYUcMrwq8OSZrT0Vp7Bc80l5T59c1GOi7RZaUMvEwzuwRfoSnYUOpaMvQ4SoBTO2j9w4sQLmkmJStvJc41wExxfYL8hFXKC1nLCUcCi4AXBybPwjpKL152B5Bm9I73ZyXckIes6ahK3nbN4Ea7mq1W8XM4Xi8dV2/4FbLER7w==" 
+                string: "0eNqlVFGOmzAUvEr0PitnFSAkG9QeoH9V+xlFyMDLxpKxWdtsiiIO0Fv0bD1JnyGbZAmbbdQfZBvPjGfesw+QyRorI5SD5AAi18pCsj6AFU+KS7+meImQADfC7Up0Ip/musyE4k4baBkIVeBPSIKWjaAKzEWBZhwSthsGqJxwAnvVbtKkqi4zNMTJXnlsyaWcSl5WwKDSliBaeR2vHC0fYgYNJNMgih5iEiAbzmiZZrjjL4JEaWcuTF4Ll6LimcQCEmdqZKdlghQn1q0w1qVXbipuaODIzwx6Feu4T27mJ6X/7R0m8OfXb2i7HbIX7808dd+s+3Ifmc9s4Dk8eS6ErSRvphVXKMdsPw5tF8Jg3m8JwvEUThb6wP/LdTi0/bkrbt6zjaHbzQcbKBe5541N7U7v+xKNZBSx2115ndV8dndSZ+pzb9h/j8miR6XntGI6gq6Qsupk4RMdU9euqj/iasfaZM5uXLER/+Hd/o+8A/OXs/X9LRPMZv7S977feWmuwFVDh6iVS7dGl6lQBIVky6VF6qfW8+3JjmdbByxgEYs2bB3RaE4j+jvoeddUXkYUcMrwq8OSZrT0Vp7Bc80l5T59c1GOi7RZaUMvEwzuwRfoSnYUOpaMvQ4SoBTO2j9w4sQLmkmJStvJc41wExxfYL8hFXKC1nLCUcCi4AXBybPwjpKL152B5Bm9I73ZyXckIes6ahK3nbN4Ea7mq1W8XM4Xi8dV2/4FbLER7w=="
             },
             {
                 id: 2,
@@ -181,7 +224,7 @@
                 tags: ["Space Age", "Logística", "Fulgora"],
                 description: "Reciclador conectado na rede logística. Receita, buffer de entrada, e limite de armazenamento são parâmetros.",
                 // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
-                string: "0eNqV2EtvnDAQAOC/UvlsIvMwL6mVeqzUU3tcrRAPb2IJDDFm223Ef+8YWEiyRNlRLsHyzHi+nVVwXkhRD6LTUhmSvhBZtqon6eGF9PJR5bVdU3kjSEq0KC9lLTQZKZGqEn9J6o5HSoQy0kgxR00Pl0wNTQE7U5deo/PSyLNwOt2eZSW0Uz6J3hBKuraH6FbZQpDR49EDp+RCUseLH/g40pucHr050U6aeEkSwmmhJ6PbOivEU36WrbabSqnLQZpMqLyoRUVSowdB12UIqdaEJ6l7k20g5tLZ8mepzQAr63nmHc6jFkKRuW5vcgvr2oemy3VubHnylYx7rflrqqItHPG306LvHal6oc1+m5uWD1qUVBJQ5h0gUOm2y7aYA6OO++AmiefGET/uHCB4Zfs8wCd03yflTbWXkOwka4jr7b5+Psw8G9ehoWTd8WZ1qWyVGmErM6j6DMJwQlhXrW4m7XeSdmGwyJyNR/jZaYuvyStRzuPXNoVUU4694dlUPxifJc82J1O7r58Ot3Oz0+CbKeGMsXftfSP2K9YOphvM++/l/WPYXbLJKDvptsmkgmQkPeV1L6yXrfAH5sbmP3jUpZz6R1gzsl6+1TdAC4/vjmtVaKPU0BWx/jcBITYgwgbE2IAEGRAybIWrEsMqMawSwyoxrBLDKjGkkpcgle4PiLABMTYgQQZcle6vsP5RxCrFWKUYqxRjlWKsUoxVirBKEVYpwipFWKUIqxRhlUKsUohVCrFKIVYpxCqFWCWOVeJYJY5V4lgljlXiWKUAqxRglQKsUoBVCrBKAVbJxyr5WCUfq+RjlXysko9V8rBKHlbJwyp5WCUPq7QbAG/h621hfhVfXvpltb3v/zCigSdY+uDy5Ly5zX5+o5quUEuh5QpFr7+khLOt9O+2lqU0uSafhLBXQT9lI4348h2K/xN2TZl2alXaRtJX/5CgpM4LAZcd8mu76p+BYmqFh14SJAmPoiAM42Qc/wMAIlol" 
+                string: "0eNqV2EtvnDAQAOC/UvlsIvMwL6mVeqzUU3tcrRAPb2IJDDFm223Ef+8YWEiyRNlRLsHyzHi+nVVwXkhRD6LTUhmSvhBZtqon6eGF9PJR5bVdU3kjSEq0KC9lLTQZKZGqEn9J6o5HSoQy0kgxR00Pl0wNTQE7U5deo/PSyLNwOt2eZSW0Uz6J3hBKuraH6FbZQpDR49EDp+RCUseLH/g40pucHr050U6aeEkSwmmhJ6PbOivEU36WrbabSqnLQZpMqLyoRUVSowdB12UIqdaEJ6l7k20g5tLZ8mepzQAr63nmHc6jFkKRuW5vcgvr2oemy3VubHnylYx7rflrqqItHPG306LvHal6oc1+m5uWD1qUVBJQ5h0gUOm2y7aYA6OO++AmiefGET/uHCB4Zfs8wCd03yflTbWXkOwka4jr7b5+Psw8G9ehoWTd8WZ1qWyVGmErM6j6DMJwQlhXrW4m7XeSdmGwyJyNR/jZaYuvyStRzuPXNoVUU4694dlUPxifJc82J1O7r58Ot3Oz0+CbKeGMsXftfSP2K9YOphvM++/l/WPYXbLJKDvptsmkgmQkPeV1L6yXrfAH5sbmP3jUpZz6R1gzsl6+1TdAC4/vjmtVaKPU0BWx/jcBITYgwgbE2IAEGRAybIWrEsMqMawSwyoxrBLDKjGkkpcgle4PiLABMTYgQQZcle6vsP5RxCrFWKUYqxRjlWKsUoxVirBKEVYpwipFWKUIqxRhlUKsUohVCrFKIVYpxCqFWCWOVeJYJY5V4lgljlXiWKUAqxRglQKsUoBVCrBKAVbJxyr5WCUfq+RjlXysko9V8rBKHlbJwyp5WCUPq7QbAG/h621hfhVfXvpltb3v/zCigSdY+uDy5Ly5zX5+o5quUEuh5QpFr7+khLOt9O+2lqU0uSafhLBXQT9lI4348h2K/xN2TZl2alXaRtJX/5CgpM4LAZcd8mu76p+BYmqFh14SJAmPoiAM42Qc/wMAIlol"
             },
             {
                 id: 3,
@@ -189,7 +232,7 @@
                 tags: ["Logística"],
                 description: "Assembler conectado a rede logística para construir itens variados. Receita e buffer de entrada são parâmetro.",
                 // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
-                string: "0eNqVlN2OqjAQx1/lpJcnxQiKKyTnZu/OMxjTFBjWSUrLtsWzxvjuZwoI62rMrt5Ap/Of33xxZoXqoLWoPcvPDEujHct3Z+bwTUsVzrRsgOVMOgdNoVC/RY0sD6ghWrELZ6gr+GB5fNlzBtqjRxgU+peT0F1TgKUL/KkSZ61x5Gx0iEmCq3iRcnZi+WaRUpgKLZSDecsZYXprlCjgII9obPCxICtBohYqpNgE4W0H5EqO2IbArbRE4MFGS3Y9Fu+dVMRJZm1sQylf+B17MrNb9AfSwDIqTVOglp6i38MvR/jsW+izqiBz1Su5YKjROi/mXvhTn8gRrSdsNmENNyKgcoaeOAgyQct5GTpLCZgWrBwo2G/yNJ1vux9r0+++PKvpbku9xSNErTVHrKjQ5QGcf9LcrG9uIcOAPFBeT8qFKSL4aC04F6F2YKmNT3S3w9BY04r5ym7J40WyXMVJun8QLJ2CWXjviPsJf3LD/6inJdqyQy8aU4EwtfhUf1qFq3VqtwAtCwUVy2up3DC2PYSoURFJPw5umKNhv+bFe9STzU8rl9xW7mZmv9YxWvIoXsRZlsTbF6olrf4/cghcu5gn4b/nu4SveUpPZJ02b0AfR21k5deHnCXz2L12dU1nIbXxOlaz9a+Hht7o6Otaj/scTZUNCd4teehZExzD+ubsD002YWJQzT99EjlTsgA1Bvz12qGqeuIjpdJrp5skW2dZ+vKy3my22eXyH7Tnyxs=" 
+                string: "0eNqVlN2OqjAQx1/lpJcnxQiKKyTnZu/OMxjTFBjWSUrLtsWzxvjuZwoI62rMrt5Ap/Of33xxZoXqoLWoPcvPDEujHct3Z+bwTUsVzrRsgOVMOgdNoVC/RY0sD6ghWrELZ6gr+GB5fNlzBtqjRxgU+peT0F1TgKUL/KkSZ61x5Gx0iEmCq3iRcnZi+WaRUpgKLZSDecsZYXprlCjgII9obPCxICtBohYqpNgE4W0H5EqO2IbArbRE4MFGS3Y9Fu+dVMRJZm1sQylf+B17MrNb9AfSwDIqTVOglp6i38MvR/jsW+izqiBz1Su5YKjROi/mXvhTn8gRrSdsNmENNyKgcoaeOAgyQct5GTpLCZgWrBwo2G/yNJ1vux9r0+++PKvpbku9xSNErTVHrKjQ5QGcf9LcrG9uIcOAPFBeT8qFKSL4aC04F6F2YKmNT3S3w9BY04r5ym7J40WyXMVJun8QLJ2CWXjviPsJf3LD/6inJdqyQy8aU4EwtfhUf1qFq3VqtwAtCwUVy2up3DC2PYSoURFJPw5umKNhv+bFe9STzU8rl9xW7mZmv9YxWvIoXsRZlsTbF6olrf4/cghcu5gn4b/nu4SveUpPZJ02b0AfR21k5deHnCXz2L12dU1nIbXxOlaz9a+Hht7o6Otaj/scTZUNCd4teehZExzD+ubsD002YWJQzT99EjlTsgA1Bvz12qGqeuIjpdJrp5skW2dZ+vKy3my22eXyH7Tnyxs="
             },
             {
                 id: 4,
@@ -205,7 +248,7 @@
                 tags: ["Logística"],
                 description: "Assembler conectado a rede logística para construir itens variados. Buffer de entrada é parâmetro.",
                 // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
-                string: "0eNqVlN2OqjAQx1/lpJcnxQiKKyTnZu/OMxjTFBjWSUrLtsWzxvjuZwoI62rMrt5Ap/Of33xxZoXqoLWoPcvPDEujHct3Z+bwTUsVzrRsgOVMOgdNoVC/RY0sD6ghWrELZ6gr+GB5fNlzBtqjRxgU+peT0F1TgKUL/KkSZ61x5Gx0iEmCq3iRcnZi+WaRUpgKLZSDecsZYXprlCjgII9obPCxICtBohYqpNgE4W0H5EqO2IbArbRE4MFGS3Y9Fu+dVMRJZm1sQylf+B17MrNb9AfSwDIqTVOglp6i38MvR/jsW+izqiBz1Su5YKjROi/mXvhTn8gRrSdsNmENNyKgcoaeOAgyQct5GTpLCZgWrBwo2G/yNJ1vux9r0+++PKvpbku9xSNErTVHrKjQ5QGcf9LcrG9uIcOAPFBeT8qFKSL4aC04F6F2YKmNT3S3w9BY04r5ym7J40WyXMVJun8QLJ2CWXjviPsJf3LD/6inJdqyQy8aU4EwtfhUf1qFq3VqtwAtCwUVy2up3DC2PYSoURFJPw5umKNhv+bFe9STzU8rl9xW7mZmv9YxWvIoXsRZlsTbF6olrf4/cghcu5gn4b/nu4SveUpPZJ02b0AfR21k5deHnCXz2L12dU1nIbXxOlaz9a+Hht7o6Otaj/scTZUNCd4teehZExzD+ubsD002YWJQzT99EjlTsgA1Bvz12qGqeuIjpdJrp5skW2dZ+vKy3my22eXyH7Tnyxs=" 
+                string: "0eNqVlN2OqjAQx1/lpJcnxQiKKyTnZu/OMxjTFBjWSUrLtsWzxvjuZwoI62rMrt5Ap/Of33xxZoXqoLWoPcvPDEujHct3Z+bwTUsVzrRsgOVMOgdNoVC/RY0sD6ghWrELZ6gr+GB5fNlzBtqjRxgU+peT0F1TgKUL/KkSZ61x5Gx0iEmCq3iRcnZi+WaRUpgKLZSDecsZYXprlCjgII9obPCxICtBohYqpNgE4W0H5EqO2IbArbRE4MFGS3Y9Fu+dVMRJZm1sQylf+B17MrNb9AfSwDIqTVOglp6i38MvR/jsW+izqiBz1Su5YKjROi/mXvhTn8gRrSdsNmENNyKgcoaeOAgyQct5GTpLCZgWrBwo2G/yNJ1vux9r0+++PKvpbku9xSNErTVHrKjQ5QGcf9LcrG9uIcOAPFBeT8qFKSL4aC04F6F2YKmNT3S3w9BY04r5ym7J40WyXMVJun8QLJ2CWXjviPsJf3LD/6inJdqyQy8aU4EwtfhUf1qFq3VqtwAtCwUVy2up3DC2PYSoURFJPw5umKNhv+bFe9STzU8rl9xW7mZmv9YxWvIoXsRZlsTbF6olrf4/cghcu5gn4b/nu4SveUpPZJ02b0AfR21k5deHnCXz2L12dU1nIbXxOlaz9a+Hht7o6Otaj/scTZUNCd4teehZExzD+ubsD002YWJQzT99EjlTsgA1Bvz12qGqeuIjpdJrp5skW2dZ+vKy3my22eXyH7Tnyxs="
             },
             {
                 id: 6,
@@ -213,7 +256,7 @@
                 tags: ["Logística", "Gleba"],
                 description: "Biocâmara conectada a rede logística para construir itens variados. Receita, buffer de entrada e nutrientes são parâmetrs.",
                 // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
-                string: "0eNqVlN2OqjAQx1/lpJcnxQiKKyTnZu/OMxjTFBjWSUrLtsWzxvjuZwoI62rMrt5Ap/Of33xxZoXqoLWoPcvPDEujHct3Z+bwTUsVzrRsgOVMOgdNoVC/RY0sD6ghWrELZ6gr+GB5fNlzBtqjRxgU+peT0F1TgKUL/KkSZ61x5Gx0iEmCq3iRcnZi+WaRUpgKLZSDecsZYXprlCjgII9obPCxICtBohYqpNgE4W0H5EqO2IbArbRE4MFGS3Y9Fu+dVMRJZm1sQylf+B17MrNb9AfSwDIqTVOglp6i38MvR/jsW+izqiBz1Su5YKjROi/mXvhTn8gRrSdsNmENNyKgcoaeOAgyQct5GTpLCZgWrBwo2G/yNJ1vux9r0+++PKvpbku9xSNErTVHrKjQ5QGcf9LcrG9uIcOAPFBeT8qFKSL4aC04F6F2YKmNT3S3w9BY04r5ym7J40WyXMVJun8QLJ2CWXjviPsJf3LD/6inJdqyQy8aU4EwtfhUf1qFq3VqtwAtCwUVy2up3DC2PYSoURFJPw5umKNhv+bFe9STzU8rl9xW7mZmv9YxWvIoXsRZlsTbF6olrf4/cghcu5gn4b/nu4SveUpPZJ02b0AfR21k5deHnCXz2L12dU1nIbXxOlaz9a+Hht7o6Otaj/scTZUNCd4teehZExzD+ubsD002YWJQzT99EjlTsgA1Bvz12qGqeuIjpdJrp5skW2dZ+vKy3my22eXyH7Tnyxs=" 
+                string: "0eNqVlN2OqjAQx1/lpJcnxQiKKyTnZu/OMxjTFBjWSUrLtsWzxvjuZwoI62rMrt5Ap/Of33xxZoXqoLWoPcvPDEujHct3Z+bwTUsVzrRsgOVMOgdNoVC/RY0sD6ghWrELZ6gr+GB5fNlzBtqjRxgU+peT0F1TgKUL/KkSZ61x5Gx0iEmCq3iRcnZi+WaRUpgKLZSDecsZYXprlCjgII9obPCxICtBohYqpNgE4W0H5EqO2IbArbRE4MFGS3Y9Fu+dVMRJZm1sQylf+B17MrNb9AfSwDIqTVOglp6i38MvR/jsW+izqiBz1Su5YKjROi/mXvhTn8gRrSdsNmENNyKgcoaeOAgyQct5GTpLCZgWrBwo2G/yNJ1vux9r0+++PKvpbku9xSNErTVHrKjQ5QGcf9LcrG9uIcOAPFBeT8qFKSL4aC04F6F2YKmNT3S3w9BY04r5ym7J40WyXMVJun8QLJ2CWXjviPsJf3LD/6inJdqyQy8aU4EwtfhUf1qFq3VqtwAtCwUVy2up3DC2PYSoURFJPw5umKNhv+bFe9STzU8rl9xW7mZmv9YxWvIoXsRZlsTbF6olrf4/cghcu5gn4b/nu4SveUpPZJ02b0AfR21k5deHnCXz2L12dU1nIbXxOlaz9a+Hht7o6Otaj/scTZUNCd4teehZExzD+ubsD002YWJQzT99EjlTsgA1Bvz12qGqeuIjpdJrp5skW2dZ+vKy3my22eXyH7Tnyxs="
             },
             {
                 id: 7,
@@ -233,8 +276,8 @@
                 // SUBSTITUA O TEXTO ABAIXO PELA SUA STRING GIGANTE
                 string: "0eNrdW91uqzgQfpUVtwtHNmBj52Iv9wH2nLuqighxW+sQQMbktKp497VD0qSJSTH2RZqqavkx880M+Jvx2H4PVmXHGsErGSzeA17UVRssHt6Dlj9XeamvybeGBYtgy4Xs1JUwqPKNvjC0iAQr3oqSBX0Y8GrNXoMF7MPT5/fN85xHrRR19byqX6O8kHzLokbUW75m4uTpuH8MA1ZJLjkbVNmdvC2rbrNSLRfwQ4NVvYq6UvJNLlkkRV61TS1ktGKlVGo2datk1JXWQcmNIKQ/UBi8KQmpOlKIa66UH5oQrfMZUDwbiIwDwdiAlJiROuUR8Sxq9X8cK7uGFR7eXt3JppOBATt1wE4mYfNqBBrNdnBs6WA8GwlaImWzkYAlEpn/4gBx/GjoXCsBtbQSAgczU7fvE86mGpDYmjmbbIBtX4AubPPx+hC8oNAJDk3duRuBKdwNP3NL261amevmUWpm7INVvUnYCX2wXIVIowh0piGXbDMEML4+iYNtw9g62tTrrmRREhwbqnbVkldbBV6Lt+HB45n6FJUFxe9gAbSGxjuwf+zVr8GAz6zEXhvB2jbiVcuEVA2uUuzB4aJulsdmDyCEPyClMSQZMmISe8zEFZPaY0JHzBjYYwJXTGiNCagrZmyPSVwxkwkdD+Db7XjxkfByweXLhkleREW9WfEqV1LMUWuM6NQN5QOVQ5fLFXvJt1wJUE8dJS/V7fVO2s6sJy5auZycySsPv2i3tEyL0bKUeXpcoL7wumEiH7QI/lZPDqnBdNm/gr43UWt85Ok1K/RQYKp34ETv7MWeueb07MHaU7+0m47+gUD96AubJhc7xRfBP7v45y7Xh9ifg9hPYg4X2HL/cF6tAz30Gt6s5SBwj9C8KTd3lVw+iXqzHNKAxVNetkx3ENPrx+5pz66fmGRnDpljfJbnfJkRx2RKjnAkxOTmqIraJTk3Z0ByDMT7msRIknEw4CJ99WtMOmpMemLM2J149E4y6gA4zQHwbh0QT3IAoHfrAMt86fb6cDrFgOSGDUBeBtdofHA9HoISbD8SIeOQuiRxnrAf0/UwAkb7/QRddBp0R8sJif0Q8+TbQYYE8tze6MRgs73UxefYi89T4KJD5kcHD1X5S3eYKjtp7AEpm4SUTIun+KD+xef0zcNJmk6LpyMO0B/Sd/cA8jA+webxSepj7JONyM5cmBH7YMbUiZwzLyo4kTPxQozIiZypHx18kDOZQpnIBzlPmpxFluRM7o2c0UlpMefRn1ywl7pr2cXU+rUhIOnNRbOCi6Lj8lg0W7IqX5VMOUqKjoWXDWbUG39+rnYZSl0makPILiiRuwtKyEfgIObAgTIPsumIbKeIQH1EBERdVCA+VMDAxwgRgxnTrxg6xKJLxFmxCMdWvI3BvfE2Tqz469wBd8BfOHXnGDxS9MfIoYNj4KWDY6uZABzfWg0LZ1YzATdoALGaCcBJ//37FLWq/d+DyRmwqvbfhcnQqr5/ez0zi63q+zdoQOI+wMVoygA3S73kiemcmYRs3uo5bAzJmd3qub13bumdu6yew6apnIucAoTR9ZVQmctqOl86UIeVbp50IMBhhZ8vHaDDSjhfOsQOKwB96WA323x7HZukVjR3WHpmpjmCfMx87vn6q5E88VAC2r0Pk+zMfd8LvpxCMCERD8F0GhL1scMGmyZGvnpVFPjYYHMN+so2Dei+w2aag2nsvu9lIlLivpdnIlLqY4fNvI8GuW+wmWgk9rG/Zubn6aHYjEdmVylx37tj8uBjGPxR5zqCPUAUolAFEfQYPsRpGIdI/RmOkzBGIdTH6p8+TobjRLfR17OPZx+HUKcV/diKGQZlrvRT1/5jBS/KfF0rzL/+7crnWuTq9paJdqcRwjFNKUUEJpSCtO//BzAo9Pc="
             }
-            
-            
+
+
         ];
 
         // ==========================================
@@ -284,24 +327,24 @@
         async function copyString(text, btnElement) {
             // Verifica se é uma string de exemplo
             if (text.startsWith("0eNvr...") && text.length < 20) {
-                 alert('Você precisa substituir a string de exemplo no código pelo sua blueprint real!');
-                 return;
+                alert('Você precisa substituir a string de exemplo no código pelo sua blueprint real!');
+                return;
             }
 
             try {
                 await navigator.clipboard.writeText(text);
                 const originalText = btnElement.innerText;
-                
+
                 btnElement.innerText = "Copiado! ✅";
                 btnElement.style.backgroundColor = "#4caf50";
                 btnElement.style.borderColor = "#4caf50";
                 btnElement.style.color = "#fff";
-                
+
                 setTimeout(() => {
                     btnElement.innerText = originalText;
-                    btnElement.style.backgroundColor = ""; 
-                    btnElement.style.borderColor = ""; 
-                    btnElement.style.color = ""; 
+                    btnElement.style.backgroundColor = "";
+                    btnElement.style.borderColor = "";
+                    btnElement.style.color = "";
                 }, 2500);
             } catch (err) {
                 console.error('Falha ao copiar:', err);
@@ -314,7 +357,7 @@
                     document.execCommand('copy');
                     alert('String copiada manualmente (fallback).');
                 } catch (err) {
-                     alert('Erro ao copiar. Por favor abra a string e copie manualmente.');
+                    alert('Erro ao copiar. Por favor abra a string e copie manualmente.');
                 }
                 document.body.removeChild(textArea);
             }
@@ -324,7 +367,5 @@
         renderBlueprints();
     </script>
 </body>
+
 </html>
-
-
-
