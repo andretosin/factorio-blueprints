@@ -51,9 +51,9 @@
         .container {
             width: 100%;
             max-width: 1200px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            column-width: 350px;
+            column-gap: 30px;
+            display: block;
         }
 
         .blueprint-card {
@@ -63,6 +63,8 @@
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             transition: transform 0.2s, border-color 0.2s;
+            break-inside: avoid;
+            margin-bottom: 30px;
         }
 
         .blueprint-card:hover {
