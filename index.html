@@ -85,21 +85,7 @@
             color: var(--accent);
         }
 
-        .card-tags {
-            text-align: right;
-        }
 
-        .card-tags span {
-            display: inline-block;
-            font-size: 0.75rem;
-            background: #3d3d3d;
-            color: #ccc;
-            padding: 3px 8px;
-            border-radius: 12px;
-            margin-left: 5px;
-            margin-bottom: 5px;
-            border: 1px solid #555;
-        }
 
         .card-desc {
             color: var(--text-muted);
@@ -356,9 +342,7 @@
                 <div class="blueprint-card">
                     <div class="card-header">
                         <div class="card-title">${bp.title}</div>
-                        <div class="card-tags">
-                            ${bp.tags.map(tag => `<span>${tag}</span>`).join('')}
-                        </div>
+
                     </div>
                     <div class="card-desc">${bp.description}</div>
                     
