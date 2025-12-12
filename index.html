@@ -42,7 +42,7 @@
             width: 100%;
             max-width: 800px;
             display: grid;
-            gap: 20px;
+            gap: 30px; /* Aumentei um pouco o espaço entre cards */
         }
 
         .blueprint-card {
@@ -51,11 +51,11 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .blueprint-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             border-color: var(--accent);
         }
 
@@ -63,19 +63,38 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .card-title { font-size: 1.25rem; font-weight: bold; color: var(--accent); }
+        .card-title { font-size: 1.4rem; font-weight: bold; color: var(--accent); }
+        .card-tags { text-align: right; }
         .card-tags span {
-            font-size: 0.8rem;
-            background: #444;
-            padding: 2px 8px;
-            border-radius: 4px;
+            display: inline-block;
+            font-size: 0.75rem;
+            background: #3d3d3d;
+            color: #ccc;
+            padding: 3px 8px;
+            border-radius: 12px;
             margin-left: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #555;
         }
 
-        .card-desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 15px; }
+        .card-desc { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem;}
+
+        /* --- NOVO CSS PARA IMAGEM --- */
+        .blueprint-image {
+            width: 100%;
+            height: auto; /* Mantém a proporção original da imagem */
+            max-height: 500px; /* Limite de altura para não dominar a tela em desktops */
+            object-fit: contain; /* Garante que a imagem inteira apareça */
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            background-color: #151515; /* Fundo escuro para imagens transparentes ou enquanto carrega */
+            display: block;
+        }
+        /* --------------------------- */
 
         .actions {
             display: flex;
@@ -86,12 +105,13 @@
             background-color: #3a3a3a;
             color: white;
             border: 1px solid var(--border);
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.2s;
+            transition: all 0.2s;
             flex: 1;
+            font-size: 1rem;
         }
 
         button.primary {
@@ -100,26 +120,33 @@
             color: #121212;
         }
 
-        button.primary:hover { background-color: var(--accent-hover); }
+        button.primary:hover { background-color: var(--accent-hover); box-shadow: 0 0 10px rgba(255, 159, 28, 0.3); }
         button.secondary:hover { background-color: #505050; }
 
         /* Área do texto da string (escondida por padrão) */
         .string-box {
             display: none;
             margin-top: 15px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         textarea {
             width: 100%;
-            height: 100px;
+            height: 120px;
             background: #111;
             color: #0f0;
             border: 1px solid var(--border);
-            font-family: monospace;
-            font-size: 0.8rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
             padding: 10px;
             resize: vertical;
-            box-sizing: border-box; /* Garante que padding não estoure largura */
+            box-sizing: border-box;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -224,17 +251,19 @@
                     </div>
                     <div class="card-desc">${bp.description}</div>
                     
+                    ${bp.imageUrl ? `<img src="${bp.imageUrl}" alt="Preview de ${bp.title}" class="blueprint-image" loading="lazy">` : ''}
+                    
                     <div class="actions">
                         <button class="primary" onclick="copyString('${bp.string}', this)">
                             Copiar String
                         </button>
                         <button class="secondary" onclick="toggleString(${bp.id})">
-                            Ver Código
+                            Ver String
                         </button>
                     </div>
 
                     <div class="string-box" id="box-${bp.id}">
-                        <textarea readonly onclick="this.select()">${bp.string}</textarea>
+                        <textarea readonly onclick="this.select()" placeholder="A string da blueprint aparecerá aqui...">${bp.string}</textarea>
                     </div>
                 </div>
             `).join('');
@@ -250,21 +279,41 @@
         }
 
         async function copyString(text, btnElement) {
+            // Verifica se é uma string de exemplo
+            if (text.startsWith("0eNvr...") && text.length < 20) {
+                 alert('Você precisa substituir a string de exemplo no código pelo sua blueprint real!');
+                 return;
+            }
+
             try {
                 await navigator.clipboard.writeText(text);
                 const originalText = btnElement.innerText;
                 
-                // Feedback visual
                 btnElement.innerText = "Copiado! ✅";
                 btnElement.style.backgroundColor = "#4caf50";
+                btnElement.style.borderColor = "#4caf50";
+                btnElement.style.color = "#fff";
                 
                 setTimeout(() => {
                     btnElement.innerText = originalText;
-                    btnElement.style.backgroundColor = ""; // Volta ao CSS original
-                }, 2000);
+                    btnElement.style.backgroundColor = ""; 
+                    btnElement.style.borderColor = ""; 
+                    btnElement.style.color = ""; 
+                }, 2500);
             } catch (err) {
                 console.error('Falha ao copiar:', err);
-                alert('Erro ao copiar automaticamente. Tente abrir o código e copiar manualmente.');
+                // Fallback para execCommand se a Clipboard API falhar (raro hoje em dia)
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('String copiada manualmente (fallback).');
+                } catch (err) {
+                     alert('Erro ao copiar. Por favor abra a string e copie manualmente.');
+                }
+                document.body.removeChild(textArea);
             }
         }
 
@@ -272,5 +321,4 @@
         renderBlueprints();
     </script>
 </body>
-
 </html>
